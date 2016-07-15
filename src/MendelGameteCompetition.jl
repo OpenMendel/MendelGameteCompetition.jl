@@ -20,7 +20,7 @@ using Distributions # From package Distributions.
 export GameteCompetition
 
 """
-This is the wrapper function for the GameteCompetition analysis option.
+This is the wrapper function for the Gamete Competition analysis option.
 """
 function GameteCompetition(control_file = ""; args...)
 
@@ -30,7 +30,7 @@ function GameteCompetition(control_file = ""; args...)
   #
   print(" \n \n")
   println("     Welcome to OpenMendel's")
-  println(" GameteCompetition analysis option")
+  println(" Gamete Competition analysis option")
   println("        version ", GAMETE_COMPETITION_VERSION)
   print(" \n \n")
   println("Reading the data.\n")
@@ -66,7 +66,7 @@ function GameteCompetition(control_file = ""; args...)
     locus_frame, phenotype_frame, pedigree_frame, snp_definition_frame) =
     read_external_data_files(keyword)
   #
-  # Execute the specifed analysis.
+  # Execute the specified analysis.
   #
   println(" \nAnalyzing the data.\n")
   execution_error = false
