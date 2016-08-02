@@ -3,16 +3,17 @@ This module orchestrates a gamete competition analysis.
 """
 module MendelGameteCompetition
 #
-# Other OpenMendel modules.
+# Required OpenMendel packages and modules.
 #
 using MendelBase
-# using DataStructures
-# using ModelConstruction
-# using ElstonStewartPreparation
-# using ElstonStewartEvaluation
-# using Optimize
+# using DataStructures           # Now in MendelBase.
+# using ModelConstruction        # Now in MendelBase.
+# using ElstonStewartPreparation # Now in MendelBase.
+# using ElstonStewartEvaluation  # Now in MendelBase.
+using Search
+using SearchSetup
 #
-# External modules.
+# Required external modules.
 #
 using DataFrames    # From package DataFrames.
 using Distributions # From package Distributions.
@@ -41,9 +42,11 @@ function GameteCompetition(control_file = ""; args...)
   #
   keyword = set_keyword_defaults!(Dict{ASCIIString, Any}())
   #
-  # Keywords unique to this analysis may be defined here
+  # Keywords unique to this analysis should be first defined here
   # by setting their default values using the format:
-  # keyword["some_keyword_name"] = value
+  # keyword["some_keyword_name"] = default_value
+  #
+  keyword["gamete_competition_table"] = "gamete competition Table Output.txt"
   #
   # Process the run-time user-specified keywords that will control the analysis.
   # This will also initialize the random number generator.
@@ -103,6 +106,12 @@ function gamete_competition_option(pedigree::Pedigree, person::Person,
   #
   keyword["eliminate_genotypes"] = true
   #
+  # Define a gamete competition data frame.
+  #
+  gamete_competition_frame = DataFrame(Marker = ASCIIString[],
+    LowAllele = ASCIIString[], LowTau = Float64[],
+    HighAllele = ASCIIString[], HighTau = Float64[], Pvalue = Float64[])
+  #
   # Subject each locus to gamete competition analysis.
   #
   (model_loci, locus.model_loci) = (locus.model_loci, 1)
@@ -114,6 +123,7 @@ function gamete_competition_option(pedigree::Pedigree, person::Person,
     # Define the parameter data structure.
     #
     keyword["constraints"] = 1
+    keyword["goal"] = "maximize"
     keyword["parameters"] = locus.alleles[loc]
     keyword["title"] = "Gamete competition analysis for " * locus.name[loc]
     parameter = set_parameter_defaults(keyword)
@@ -141,16 +151,20 @@ function gamete_competition_option(pedigree::Pedigree, person::Person,
       return (f, nothing, nothing)
     end # function fun
     (best_par, best_value) = optimize(fun, parameter)
+    (low_tau, low_allele) = findmin(best_par)
+    (high_tau, high_allele) = findmax(best_par)
     #
     # Report the pvalue of likelihood ratio test statistic.
     #
     lrt = 2 * (parameter.function_value[2] - parameter.function_value[1])
     degrees_of_freedom = locus.alleles[loc] - 1
     pvalue = ccdf(Chisq(degrees_of_freedom), lrt)
-    pvalue_string = @sprintf("%8.3e", pvalue)
-    println(io, " \nThe chisquare test statistic ", round(lrt, 2),
-      " has pvalue $pvalue_string on $degrees_of_freedom degree(s) of freedom.")
+    push!(gamete_competition_frame, [locus.name[loc], 
+      locus.allele_name[loc][low_allele], low_tau, 
+      locus.allele_name[loc][high_allele], high_tau, pvalue])
   end
+  writetable(keyword["gamete_competition_table"], gamete_competition_frame)
+  show(gamete_competition_frame)
   close(io)
   return skipped_loci
 end # function gamete_competition_option
