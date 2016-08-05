@@ -1,8 +1,8 @@
 # MendelGameteCompetition
 
-This [Julia](http://julialang.org/) package  implements a gamete competition analysis.  It is one component of the umbrella [OpenMendel](https://openmendel.github.io) project.
+This [Julia](http://julialang.org/) package  implements a gamete competition analysis, which is a generalization of the TDT analysis.  It is one component of the umbrella [OpenMendel](https://openmendel.github.io) project.
 
-[![](https://img.shields.io/badge/docs-latest-blue.svg)](https://OpenMendel.github.io/MendelGameteCompetition.jl/latest)
+[![](https://img.shields.io/badge/docs-current-blue.svg)](https://OpenMendel.github.io/MendelGameteCompetition.jl)
 
 ## Installation
 
@@ -16,9 +16,9 @@ This package supports Julia v0.4.
 
 ## Data Files
 
-To run this analysis package you will need to prepare a Control file and have your data files available. The Control file holds the names of your data files and any optional parameters for the analysis. Details on the general format and contents of the Control and data files can be found on the OpenMendel [documentation page](https://openmendel.github.io/). Descriptions of the specific options available within the MendelGameteCompetition analysis package are in its [documentation page](https://openmendel.github.io/MendelGameteCompetition.jl).
+To run this analysis package you will need to prepare a Control file and have your data files available. The Control file holds the names of your data files and any optional parameters for the analysis. Details on the general format and contents of the Control and data files can be found on the MendelBase [documentation page](https://openmendel.github.io/MendelBase.jl). Descriptions of the specific options available within the MendelGameteCompetition analysis package are in its [documentation page](https://openmendel.github.io/MendelGameteCompetition.jl).
 
-There are example data files in the "docs" subfolder of the MendelGameteCompetition package, for example, ~/.julia/v0.4/MendelGameteCompetition/docs.
+There are example data files in the "docs" subfolder of each Mendel package, for example, ~/.julia/v0.4/MendelGameteCompetition/docs.
 
 ## Running the Analysis
 
@@ -34,11 +34,12 @@ Next, if necessary, change to the directory containing your files, for example,
 
 If you use this analysis package in your research, please cite the following reference in the resulting publications:
 
-Lange K, Papp JC, Sinsheimer JS, Sripracha R, Zhou H, Sobel EM (2013) Mendel: The Swiss army knife of genetic analysis programs. Bioinformatics 29:1568-1570.
+*Lange K, Papp JC, Sinsheimer JS, Sripracha R, Zhou H, Sobel EM (2013) Mendel: The Swiss army knife of genetic analysis programs. Bioinformatics 29:1568-1570.*
 
-Sinsheimer JS, Blangero J, Lange K (2000). Gamete competition models. American Journal of Human Genetics 66:1168-1172.
 
-Sinsheimer JS, McKenzie CA, Keavney B, Lange K (2001). SNPs and snails and puppy dogs' tails: Analysis of SNP data using the gamete competition model. Annals of Human Genetics 65:483-490.
+*Sinsheimer JS, Blangero J, Lange K (2000). Gamete competition models. American Journal of Human Genetics 66:1168-1172.*
+
+*Sinsheimer JS, McKenzie CA, Keavney B, Lange K (2001). SNPs and snails and puppy dogs' tails: Analysis of SNP data using the gamete competition model. Annals of Human Genetics 65:483-490.*
 
 <!--- ## Contributing
 We welcome contributions to this Open Source project. To contribute, follow this procedure ... --->
@@ -46,3 +47,4 @@ We welcome contributions to this Open Source project. To contribute, follow this
 ## Acknowledgments
 
 This project is supported by the National Institutes of Health under NIGMS awards R01GM053275 and R25GM103774 and NHGRI award R01HG006139.
+
