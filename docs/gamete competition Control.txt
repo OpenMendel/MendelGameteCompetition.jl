@@ -5,9 +5,8 @@ locus_file = gamete competition LocusFrame.txt
 pedigree_file = gamete competition PedigreeFrame.txt
 output_file = gamete competition Output.txt
 #
-# Analysis parameters.
+# Analysis parameters for Gamete Competition option.
 #
-analysis_option = GameteCompetition
 disease_status = ACE
 affected_designator = 1
 standard_errors = true
