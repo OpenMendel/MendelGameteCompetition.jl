@@ -167,18 +167,111 @@ standard_errors = true
 
 <p>There are two forms of output.  A table is output to the screen that corresponds to a data frame that can be used in other analyses as desired.  For the SNP data provided Open Mendel, the results are:</p>
 
-<p>Row │ Marker  │ LowAllele │ LowTau   │ HighAllele │ HighTau     │ Pvalue        │
-----------------      |  ---------|-------       |  --------|--------      |  ---------|-------
- 1         │ "SNP1"│ "1"           │ 1.0            │      "2"        │     5.41918 │ 2.80892e-5 │
- 2         │ "SNP2"│ "1"           │ 1.0            │      "2"        │     5.0539   │ 2.57148e-5 │
- 3         │ "SNP3"│  "1"          │ 1.0            │      "2"        │     5.23133 │ 3.22822e-6 │ 
- 4         │ "SNP4"│  "1"          │ 1.0            │      "2"        │     4.52948 │ 3.96425e-5 │
- 5         │ "SNP5"│  "1"          │ 1.0            │      "2"        │     4.59438 │ 3.25329e-5 │
- 6         │ "SNP6"│  "1"          │ 0.654208 │      "2"        │     1.0          │ 0.00527033│
- 7         │ "SNP7"│  "2"          │ 1.0            │      "1"        │     8.04062 │ 2.28436e-6 │
- 8         │ "ID"      │ "1"           │ 1.0            │     "2"         │     6.67263 │ 4.60103e-6 │
- 9         │ "SNP9"│ "1"           │ 1.0            │     "2"         │     7.45069 │ 7.69303e-6 │
- 10       │ "CT"     │ "1"           │ 1.0            │    "2"          │     8.51002 │ 7.94566e-7 │ </p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Marker</th>
+<th>LowAllele</th>
+<th>LowTau</th>
+<th>HighAllele</th>
+<th>HighTau</th>
+<th>Pvalue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>SNP1</td>
+<td>1</td>
+<td>1.0</td>
+<td>2</td>
+<td>5.41918</td>
+<td>2.80892e-5</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SNP2</td>
+<td>1</td>
+<td>1.0</td>
+<td>2</td>
+<td>5.0539</td>
+<td>2.57148e-5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SNP3</td>
+<td>1</td>
+<td>1.0</td>
+<td>2</td>
+<td>5.23133</td>
+<td>3.22822e-6</td>
+</tr>
+<tr>
+<td>4</td>
+<td>SNP4</td>
+<td>1</td>
+<td>1.0</td>
+<td>2</td>
+<td>4.52948</td>
+<td>3.96425e-5</td>
+</tr>
+<tr>
+<td>5</td>
+<td>SNP5</td>
+<td>1</td>
+<td>1.0</td>
+<td>2</td>
+<td>4.59438</td>
+<td>3.25329e-5</td>
+</tr>
+<tr>
+<td>6</td>
+<td>SNP6</td>
+<td>1</td>
+<td>0.654208</td>
+<td>2</td>
+<td>1.0</td>
+<td>0.00527033</td>
+</tr>
+<tr>
+<td>7</td>
+<td>SNP7</td>
+<td>2</td>
+<td>1.0</td>
+<td>1</td>
+<td>8.04062</td>
+<td>2.28436e-6</td>
+</tr>
+<tr>
+<td>8</td>
+<td>ID</td>
+<td>1</td>
+<td>1.0</td>
+<td>2</td>
+<td>6.67263</td>
+<td>4.60103e-6</td>
+</tr>
+<tr>
+<td>9</td>
+<td>SNP9</td>
+<td>1</td>
+<td>1.0</td>
+<td>2</td>
+<td>7.45069</td>
+<td>7.69303e-6</td>
+</tr>
+<tr>
+<td>10</td>
+<td>CT</td>
+<td>1</td>
+<td>1.0</td>
+<td>2</td>
+<td>8.51002</td>
+<td>7.94566e-7</td>
+</tr>
+</tbody>
+</table>
 
 <p>For each marker, the allele with the smallest transmission, its corresponding <em>Tau</em>, the allele with the largest transmission, and its corresponding <em>Tau</em> are provided along with the p-value for the test of association of the marker with the trait. In the example provided, the CT Marker is the most associated with the trait because it has the smallest p-value.  The most frequent allele is the 1 allele so it is assigned <em>Tau1</em> = 1.  The 2 allele is ~8.51 times more likely to be transmitted from a 1/2 parent than the 1 allele.  Details of the analysis are provided in the output text file. In this text file, the iterations of the numeric loglikelihood maximization, the maximum likelihood estimates at the maximum log likelihood, their standard errors and their correlations are provided for each marker (see the example output, <a href="https://github.com/OpenMendel/MendelGameteCompetition.jl/blob/master/docs/gamete%20competition%20Output.txt">gamete competition Output.txt</a>)</p>
 
