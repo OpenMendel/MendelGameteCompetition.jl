@@ -22,11 +22,17 @@ There are example data files in the "docs" subfolder of each Mendel package, for
 
 ## Running the Analysis
 
-To run this analysis package, first launch Julia. Then load the package with the command:     julia> using MendelGameteCompetition
+To run this analysis package, first launch Julia. Then load the package with the command:
+
+     julia> using MendelGameteCompetition
 
 Next, if necessary, change to the directory containing your files, for example,
 
-     julia> cd("~/path/to/data/files/")Finally, to run the analysis using the parameters in the control file Control_file.txt use the command:     julia> GameteCompetition("Control_file.txt")
+     julia> cd("~/path/to/data/files/")
+
+Finally, to run the analysis using the parameters in the control file Control_file.txt use the command:
+
+     julia> GameteCompetition("Control_file.txt")
 
 *Note: The package is called* MendelGameteCompetition *but the analysis function is called simply* GameteCompetition.
 
@@ -35,7 +41,6 @@ Next, if necessary, change to the directory containing your files, for example,
 If you use this analysis package in your research, please cite the following reference in the resulting publications:
 
 *Lange K, Papp JC, Sinsheimer JS, Sripracha R, Zhou H, Sobel EM (2013) Mendel: The Swiss army knife of genetic analysis programs. Bioinformatics 29:1568-1570.*
-
 
 *Sinsheimer JS, Blangero J, Lange K (2000). Gamete competition models. American Journal of Human Genetics 66:1168-1172.*
 
