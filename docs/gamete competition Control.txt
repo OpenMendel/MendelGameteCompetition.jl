@@ -7,6 +7,6 @@ output_file = gamete competition Output.txt
 #
 # Analysis parameters for Gamete Competition option.
 #
-disease_status = ACE
+trait = ACE
 affected_designator = 1
 standard_errors = true
