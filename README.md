@@ -10,7 +10,7 @@ This [Julia](http://julialang.org/) package  implements a gamete competition ana
 
 Within Julia, use the package manager to install MendelGameteCompetition:
 
-    Pkg.clone("git@github.com:OpenMendel/MendelGameteCompetition.jl.git")
+    Pkg.clone("https://github.com/OpenMendel/MendelGameteCompetition.jl.git")
 
 This package supports Julia v0.4.
 
@@ -52,4 +52,3 @@ We welcome contributions to this Open Source project. To contribute, follow this
 ## Acknowledgments
 
 This project is supported by the National Institutes of Health under NIGMS awards R01GM053275 and R25GM103774 and NHGRI award R01HG006139.
-
