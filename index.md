@@ -1,17 +1,17 @@
 ### Overview
-Mendel Gamete Competition is a component of the umbrella [OpenMendel](https://openmendel.github.io) project. The gamete competition model is an application of the Bradley-Terry model and can be considered a parametric form of the TDT for use with pedigree data because, besides getting p-values, we also get a measure of the strength of the allelic associations. The Bradley-Terry model was originally applied to problems such as ranking teams in a sports league based on the intra-league win/loss records. In genetics, alleles assume the role of teams, and transmission parameters (the *τs*) assume the role of the winning propensities [2](#2), [3](#3). As implemented in this version of Open Mendel, the gamete competition is an affected only association analysis and we assume the allele frequencies for the marker are known without error.  Let allele *i* be assigned a segregation parameter *τ<sub>i</sub>* , then the probability that a heterozygous parent with genotype *i*=j transmits allele *i* is the ratio *τ<sub>i</sub>/(τ<sub>i</sub>+τ<sub>j</sub>)*.  Because this ratio is invariant when *i* and *j* are multiplied by the same constant *c*, we need to impose the constraint that the most frequent allele *k* has segregation parameter *τ<sub>k</sub>* = 1. These propensities replace the normally used Mendelian segregation parameters for heterozygous parents' transmissions in the Elston-Stewart-Ott representation of the likelihood of the pedigrees.  In fact, under the null of no association between the marker and the trait in the gamete competition, Mendelian segregation ratios hold for heterozygous parents' transmissions so that *τ<sub>i</sub>*=1 is true for all alleles *i* and the likelihood reverts to the standard one. Note that the transmissions for homozygous parents always conform to standard Mendelian segregation ratios both under the null or alternative thus, like the TDT, only heterozygous parents are informative.  To test whether Mendelian segregation can be rejected, we estimate these *τs* by maximum likelihood and conduct a likelihood ratio test. P-values are calculated assuming that the likelihood ratio test statistic is asymptotically chi square distributed. The degrees of freedom are equal to the number of alleles minus 1.
+Mendel Gamete Competition is a component of the umbrella [OpenMendel](https://openmendel.github.io) project. The gamete competition model is an application of the Bradley-Terry model and can be considered a parametric form of the TDT for use with pedigree data because, besides getting p-values, we also get a measure of the strength of the allelic associations. The Bradley-Terry model was originally applied to problems such as ranking teams in a sports league based on the intra-league win/loss records. In genetics, alleles assume the role of teams, and transmission parameters (the *τs*) assume the role of the winning propensities [2](#2), [3](#3). As implemented in this version of OpenMendel, the gamete competition is an affected only association analysis and we assume the allele frequencies for the marker are known without error.  Let allele *i* be assigned a segregation parameter *τ<sub>i</sub>* , then the probability that a heterozygous parent with genotype *i*=j transmits allele *i* is the ratio *τ<sub>i</sub>/(τ<sub>i</sub>+τ<sub>j</sub>)*.  Because this ratio is invariant when *i* and *j* are multiplied by the same constant *c*, we need to impose the constraint that the most frequent allele *k* has segregation parameter *τ<sub>k</sub>* = 1. These propensities replace the normally used Mendelian segregation parameters for heterozygous parents' transmissions in the Elston-Stewart-Ott representation of the likelihood of the pedigrees.  In fact, under the null of no association between the marker and the trait in the gamete competition, Mendelian segregation ratios hold for heterozygous parents' transmissions so that *τ<sub>i</sub>*=1 is true for all alleles *i* and the likelihood reverts to the standard one. Note that the transmissions for homozygous parents always conform to standard Mendelian segregation ratios both under the null or alternative thus, like the TDT, only heterozygous parents are informative.  To test whether Mendelian segregation can be rejected, we estimate these *τs* by maximum likelihood and conduct a likelihood ratio test. P-values are calculated assuming that the likelihood ratio test statistic is asymptotically chi square distributed. The degrees of freedom are equal to the number of alleles minus 1.
 
 ### Appropriate Problems and Data Sets
 The Gamete Competition model applies to pedigrees, including those with missing marker data. With too many marker alleles computational efficiency suffers and large sample statistical assumptions become suspect. We recommend consolidating alleles until at most eight alleles remain and each has a frequency of 0.05 or greater. If the fraction of missing data is large, ethnic stratification may come into play. One remedy is to limit analysis to a single ethnic group; another is to use ethnic-specific allele frequencies. If you opt for the latter strategy, then you cannot simultaneously estimate allele frequencies and transmission parameters.
 
 ### Installation
-*Note: Three OpenMendel packages - [SnpArrays](https://github.com/OpenMendel/SnpArrays.jl), [Search](https://github.com/OpenMendel/Search.jl), and [MendelBase](https://github.com/OpenMendel/MendelBase.jl) must be installed before any Mendel analysis packages will run.*
+*Note: The three OpenMendel packages (1) SnpArrays, (2) Search, and (3) MendelBase must be installed before any other OpenMendel package will run. It is easiest if these three packages are installed in the above order and before any other OpenMendel package.*
 
 Within Julia, use the package manager to install MendelGameteCompetition:
 
     Pkg.clone("https://github.com/OpenMendel/MendelGameteCompetition.jl.git")
 
-This package supports Julia v0.4.
+This package supports Julia v0.4 and v0.5.
 
 ### Input Files
 The MendelGameteCompetition analysis package uses the following input files. Example input files can be found in the [docs]( https://github.com/OpenMendel/MendelGameteCompetition.jl/tree/master/docs) subfolder of the MendelGameteCompetition project. (An analysis won't always need every file type below.)
@@ -44,7 +44,7 @@ Below is an example of a simple Control file to run Gamete Competition:
 	affected_designator = 1
 	standard_errors = true
 
-In the example above, there are six keywords. The three keywords specify the input and output files: *gamete competition LocusFrame.txt*, *gamete competition PedigreeFrame.txt*, and *gamete competition Output.txt*. The last three keywords specify the analysis parameters: *disease_status*, *affected_designator*, and *standard_errors*. The text after the '=' are the keyword values.
+In the example above, there are six keywords. The first three keywords specify the input and output files: *gamete competition LocusFrame.txt*, *gamete competition PedigreeFrame.txt*, and *gamete competition Output.txt*. The last three keywords specify the analysis parameters: *disease_status*, *affected_designator*, and *standard_errors*. The text after the '=' are the keyword values.
 
 ### Keywords<a id="keywords-table"></a>
 This is a list of OpenMendel keywords specific to Gamete Competition. A list of OpenMendel keywords common to most analysis package can be found [here](https://openmendel.github.io/MendelBase.jl/#keywords-table). The names of keywords are *not* case sensitive. (The keyword values *may* be case sensitive.)
@@ -77,7 +77,7 @@ Finally, to run the analysis using the parameters in the control file Control_fi
 *Note: The package is called* MendelGameteCompetition *but the analysis function is called simply* GameteCompetition.
 
 ### Interpreting the results
-There are two forms of output.  A table is output to the screen that corresponds to a data frame that can be used in other analyses as desired.  For the SNP data provided Open Mendel, the results are:
+There are two forms of output.  A table is output to the screen that corresponds to a data frame that can be used in other analyses as desired.  For the SNP data provided in the example data files in the Gamete Competition [docs]( https://github.com/OpenMendel/MendelGameteCompetition.jl/tree/master/docs) folder, the results are:
 
 Row | Marker  | LowAllele | Low τ   | HighAllele | High τ | Pvalue  |
 ----|  -----  |-------    |  --------|--------   |  --------|----     |
@@ -98,11 +98,11 @@ For each marker, the allele with the smallest transmission, its corresponding *�
 
 If you use this analysis package in your research, please cite the following reference in the resulting publications:
 
-<a id="1"></a> *Lange K, Papp JC, Sinsheimer JS, Sripracha R, Zhou H, Sobel EM (2013) Mendel: The Swiss army knife of genetic analysis programs. Bioinformatics 29:1568-1570.*
+<a id="1"></a> *1. Lange K, Papp JC, Sinsheimer JS, Sripracha R, Zhou H, Sobel EM (2013) Mendel: The Swiss army knife of genetic analysis programs. Bioinformatics 29:1568-1570.*
 
-<a id="2"></a> *Sinsheimer JS, Blangero J, Lange K (2000). Gamete competition models. American Journal of Human Genetics 66:1168-1172.*
+<a id="2"></a> *2. Sinsheimer JS, Blangero J, Lange K (2000). Gamete competition models. American Journal of Human Genetics 66:1168-1172.*
 
-<a id="3"></a> *Sinsheimer JS, McKenzie CA, Keavney B, Lange K (2001). SNPs and snails and puppy dogs' tails: Analysis of SNP data using the gamete competition model. Annals of Human Genetics 65:483-490.*
+<a id="3"></a> *3. Sinsheimer JS, McKenzie CA, Keavney B, Lange K (2001). SNPs and snails and puppy dogs' tails: Analysis of SNP data using the gamete competition model. Annals of Human Genetics 65:483-490.*
 
 <!--- ### Contributing
 We welcome contributions to this Open Source project. To contribute, follow this procedure ... --->
