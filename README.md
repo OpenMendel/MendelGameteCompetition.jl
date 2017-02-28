@@ -16,7 +16,7 @@ This package supports Julia v0.4 and v0.5.
 
 ## Data Files
 
-To run this analysis package you will need to prepare a Control file and have your data files available. The Control file holds the names of your data files and any optional parameters for the analysis. Details on the general format and contents of the Control and data files can be found on the MendelBase [documentation page](https://openmendel.github.io/MendelBase.jl). Descriptions of the specific options available within the MendelGameteCompetition analysis package are in its [documentation page](https://openmendel.github.io/MendelGameteCompetition.jl).
+To run this analysis package you will need to prepare a Control file and have your data files available. The Control file holds the names of your data files and any optional parameters for the analysis. Details on the general format and contents of the Control and data files can be found on the MendelBase [documentation page](https://openmendel.github.io/MendelBase.jl). Descriptions of the specific options available within the MendelGameteCompetition analysis package are in the MendelGameteCompetition [documentation page](https://openmendel.github.io/MendelGameteCompetition.jl).
 
 There are example data files in the "docs" subfolder of each Mendel package, for example, ~/.julia/v0.5/MendelGameteCompetition/docs.
 
