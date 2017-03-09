@@ -5,7 +5,7 @@ Mendel Gamete Competition is a component of the umbrella [OpenMendel](https://op
 The Gamete Competition model applies to pedigrees, including those with missing marker data. With too many marker alleles computational efficiency suffers and large sample statistical assumptions become suspect. We recommend consolidating alleles until at most eight alleles remain and each has a frequency of 0.05 or greater. If the fraction of missing data is large, ethnic stratification may come into play. One remedy is to limit analysis to a single ethnic group; another is to use ethnic-specific allele frequencies. If you opt for the latter strategy, then you cannot simultaneously estimate allele frequencies and transmission parameters.
 
 ### Installation
-*Note: The three OpenMendel packages (1) SnpArrays, (2) Search, and (3) MendelBase must be installed before any other OpenMendel package will run. It is easiest if these three packages are installed in the above order and before any other OpenMendel package.*
+*Note: The three OpenMendel packages (1) [SnpArrays](https://openmendel.github.io/SnpArrays.jl/latest/), (2) [Search](https://openmendel.github.io/Search.jl), and (3) [MendelBase](https://openmendel.github.io/MendelBase.jl) must be installed before any other OpenMendel package will run. It is easiest if these three packages are installed in the above order and before any other OpenMendel package.*
 
 Within Julia, use the package manager to install MendelGameteCompetition:
 
@@ -14,22 +14,22 @@ Within Julia, use the package manager to install MendelGameteCompetition:
 This package supports Julia v0.4 and v0.5.
 
 ### Input Files
-The MendelGameteCompetition analysis package uses the following input files. Example input files can be found in the [docs]( https://github.com/OpenMendel/MendelGameteCompetition.jl/tree/master/docs) subfolder of the MendelGameteCompetition project. (An analysis won't always need every file type below.)
+The MendelGameteCompetition analysis package uses the following input files. Example input files can be found in the [docs](https://github.com/OpenMendel/MendelGameteCompetition.jl/tree/master/docs) subfolder of the MendelGameteCompetition project. (An analysis won't always need every file type below.)
 
 * [Control File](#control-file): Specifies the names of your data input and output files and any optional parameters (*keywords*) for the analysis. (For a list of common keywords, see [Keywords Table](https://openmendel.github.io/MendelBase.jl/#keywords-table)).
-* [Locus File]( https://openmendel.github.io/MendelBase.jl/#locus-file): Names and describes the genetic loci in your data.
-* [Pedigree File]( https://openmendel.github.io/MendelBase.jl/#pedigree-file): Gives information about your individuals, such as name, sex, family structure, and ancestry.
-* [Phenotype File]( https://openmendel.github.io/MendelBase.jl/#phenotype-file): Lists the available phenotypes.
+* [Locus File](https://openmendel.github.io/MendelBase.jl/#locus-file): Names and describes the genetic loci in your data.
+* [Pedigree File](https://openmendel.github.io/MendelBase.jl/#pedigree-file): Gives information about your individuals, such as name, sex, family structure, and ancestry.
+* [Phenotype File](https://openmendel.github.io/MendelBase.jl/#phenotype-file): Lists the available phenotypes.
 * [SNP Definition File](https://openmendel.github.io/MendelBase.jl/#snp-definition-file): Defines your SNPs with information such as SNP name, chromosome, position, allele names, allele frequencies.
 * [SNP Data File](https://openmendel.github.io/MendelBase.jl/#snp-data-file): Holds the genotypes for your data set. Must be a standard binary PLINK BED file in SNP major format. If you have a SNP data file you must have a SNP definition file.
 
-### Control file<a id="control-file"></a>
+<a id="control-file"></a>
+### Control file
 The Control file is a text file consisting of keywords and their assigned values. The format of the Control file is:
 
 	Keyword = Keyword_Value(s)
 
 Below is an example of a simple Control file to run Gamete Competition:
-
 
 	#
 	# Input and Output files.
@@ -58,7 +58,7 @@ xlinked_analysis  |  FALSE  |  TRUE, FALSE  |  Whether or not markers are on the
 
 
 ### Data Files
-Gamete Competition requires a [Control file](https://openmendel.github.io/MendelBase.jl/#control-file), and a [Pedigree file](https://openmendel.github.io/MendelBase.jl/#pedigree-file). Genotype data can be included in the Pedigree file, in which case a [Locus file](https://openmendel.github.io/MendelBase.jl/#locus-file) is required. Alternatively, genotype data can be provided in a [SNP data file]( https://openmendel.github.io/MendelBase.jl/#snp-data-file), in which case a [SNP Definition File]( https://openmendel.github.io/MendelBase.jl/#snp-definition-file) is required. OpenMendel will also accept [PLINK format](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml) FAM and BIM files. Details on the format and contents of the Control and data files can be found on the [MendelBase](https://openmendel.github.io/MendelBase.jl) documentation page. There are example data files in the Gamete Competition [docs]( https://github.com/OpenMendel/MendelGameteCompetition.jl/tree/master/docs) folder.
+Gamete Competition requires a [Control file](https://openmendel.github.io/MendelBase.jl/#control-file), and a [Pedigree file](https://openmendel.github.io/MendelBase.jl/#pedigree-file). Genotype data can be included in the Pedigree file, in which case a [Locus file](https://openmendel.github.io/MendelBase.jl/#locus-file) is required. Alternatively, genotype data can be provided in a [SNP data file](https://openmendel.github.io/MendelBase.jl/#snp-data-file), in which case a [SNP Definition File](https://openmendel.github.io/MendelBase.jl/#snp-definition-file) is required. OpenMendel will also accept [PLINK format](http://zzz.bwh.harvard.edu/plink) FAM and BIM files. Details on the format and contents of the Control and data files can be found on the [MendelBase](https://openmendel.github.io/MendelBase.jl) documentation page. There are example data files in the Gamete Competition [docs](https://github.com/OpenMendel/MendelGameteCompetition.jl/tree/master/docs) folder.
 
 ### Running the Analysis
 
@@ -77,7 +77,7 @@ Finally, to run the analysis using the parameters in the control file Control_fi
 *Note: The package is called* MendelGameteCompetition *but the analysis function is called simply* GameteCompetition.
 
 ### Interpreting the results
-There are two forms of output.  A table is output to the screen that corresponds to a data frame that can be used in other analyses as desired.  For the SNP data provided in the example data files in the Gamete Competition [docs]( https://github.com/OpenMendel/MendelGameteCompetition.jl/tree/master/docs) folder, the results are:
+There are two forms of output.  A table is output to the screen that corresponds to a data frame that can be used in other analyses as desired.  For the SNP data provided in the example data files in the Gamete Competition [docs](https://github.com/OpenMendel/MendelGameteCompetition.jl/tree/master/docs) folder, the results are:
 
 Row | Marker  | LowAllele | Low τ   | HighAllele | High τ | Pvalue  |
 ----|  -----  |-------    |  --------|--------   |  --------|----     |
@@ -98,11 +98,14 @@ For each marker, the allele with the smallest transmission, its corresponding *�
 
 If you use this analysis package in your research, please cite the following reference in the resulting publications:
 
-<a id="1"></a> *1. Lange K, Papp JC, Sinsheimer JS, Sripracha R, Zhou H, Sobel EM (2013) Mendel: The Swiss army knife of genetic analysis programs. Bioinformatics 29:1568-1570.*
+<a id="1"></a>
+*1. Lange K, Papp JC, Sinsheimer JS, Sripracha R, Zhou H, Sobel EM (2013) Mendel: The Swiss army knife of genetic analysis programs. Bioinformatics 29:1568-1570.*
 
-<a id="2"></a> *2. Sinsheimer JS, Blangero J, Lange K (2000). Gamete competition models. American Journal of Human Genetics 66:1168-1172.*
+<a id="2"></a>
+*2. Sinsheimer JS, Blangero J, Lange K (2000). Gamete competition models. American Journal of Human Genetics 66:1168-1172.*
 
-<a id="3"></a> *3. Sinsheimer JS, McKenzie CA, Keavney B, Lange K (2001). SNPs and snails and puppy dogs' tails: Analysis of SNP data using the gamete competition model. Annals of Human Genetics 65:483-490.*
+<a id="3"></a>
+*3. Sinsheimer JS, McKenzie CA, Keavney B, Lange K (2001). SNPs and snails and puppy dogs' tails: Analysis of SNP data using the gamete competition model. Annals of Human Genetics 65:483-490.*
 
 <!--- ### Contributing
 We welcome contributions to this Open Source project. To contribute, follow this procedure ... --->
