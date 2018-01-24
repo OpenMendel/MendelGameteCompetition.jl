@@ -12,7 +12,7 @@ Within Julia, use the package manager to install MendelGameteCompetition:
 
     Pkg.clone("https://github.com/OpenMendel/MendelGameteCompetition.jl.git")
 
-This package supports Julia v0.4 and v0.5.
+This package supports Julia v0.5 and v0.6.
 
 ## Data Files
 
