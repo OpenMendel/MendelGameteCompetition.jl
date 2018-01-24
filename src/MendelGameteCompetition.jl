@@ -264,7 +264,7 @@ function initialize_optimization_gamete_competition!(locus::Locus,
        sum_freq = sum(locus.frequency[loc][:, allele])
     end
   end
-  parameter.constraint[1, n] = 1.0
+  if n > 0; parameter.constraint[1, n] = 1.0; end
   parameter.constraint_level[1] = 1.0
   return parameter
 end # function initialize_optimization_gamete_competition!
