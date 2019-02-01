@@ -5,16 +5,16 @@ Mendel Gamete Competition is a component of the umbrella [OpenMendel](https://op
 The Gamete Competition model applies to pedigrees, including those with missing marker data. With too many marker alleles computational efficiency suffers and large sample statistical assumptions become suspect. We recommend consolidating alleles until at most eight alleles remain and each has a frequency of 0.05 or greater. If the fraction of missing data is large, ethnic stratification may come into play. One remedy is to limit analysis to a single ethnic group; another is to use ethnic-specific allele frequencies. If you opt for the latter strategy, then you cannot simultaneously estimate allele frequencies and transmission parameters.
 
 ### Installation
-*Note: The three OpenMendel packages (1) [SnpArrays](https://openmendel.github.io/SnpArrays.jl/latest/), (2) [Search](https://openmendel.github.io/Search.jl), and (3) [MendelBase](https://openmendel.github.io/MendelBase.jl) must be installed before any other OpenMendel package will run. It is easiest if these three packages are installed in the above order and before any other OpenMendel package.*
+*Note: The three OpenMendel packages (1) [SnpArrays](https://openmendel.github.io/SnpArrays.jl/latest/), (2) [MendelSearch](https://openmendel.github.io/MendelSearch.jl), and (3) [MendelBase](https://openmendel.github.io/MendelBase.jl) must be installed before any other OpenMendel package will run. It is easiest if these three packages are installed in the above order and before any other OpenMendel package.*
 
 Within Julia, use the package manager to install MendelGameteCompetition:
 
-    Pkg.clone("https://github.com/OpenMendel/MendelGameteCompetition.jl.git")
+    pkg> add https://github.com/OpenMendel/MendelGameteCompetition.jl.git
 
-This package supports Julia v0.4 and v0.5.
+This package supports Julia v1.0+
 
 ### Input Files
-The MendelGameteCompetition analysis package uses the following input files. Example input files can be found in the [docs](https://github.com/OpenMendel/MendelGameteCompetition.jl/tree/master/docs) subfolder of the MendelGameteCompetition project. (An analysis won't always need every file type below.)
+The MendelGameteCompetition analysis package uses the following input files. Example input files can be found in the [data](https://github.com/OpenMendel/MendelGameteCompetition.jl/tree/master/data) subfolder of the MendelGameteCompetition project. (An analysis won't always need every file type below.)
 
 * [Control File](#control-file): Specifies the names of your data input and output files and any optional parameters (*keywords*) for the analysis. (For a list of common keywords, see [Keywords Table](https://openmendel.github.io/MendelBase.jl/#keywords-table)).
 * [Locus File](https://openmendel.github.io/MendelBase.jl/#locus-file): Names and describes the genetic loci in your data.
