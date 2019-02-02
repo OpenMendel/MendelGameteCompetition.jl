@@ -1,3 +1,5 @@
+__precompile__()
+
 """
 This module orchestrates a gamete competition analysis.
 """
@@ -6,17 +8,16 @@ module MendelGameteCompetition
 # Required OpenMendel packages and modules.
 #
 using MendelBase
-# using DataStructures           # Now in MendelBase.
-# using ModelConstruction        # Now in MendelBase.
-# using ElstonStewartPreparation # Now in MendelBase.
-# using ElstonStewartEvaluation  # Now in MendelBase.
-using Search
-using SearchSetup
+# namely: DataStructures, ModelConstructions,
+# ElstonStewartPreparations, ElstonStewartEvaluations
+using MendelSearch
+using SearchSetup   # From package MendelSearch.
 #
 # Required external modules.
 #
-using DataFrames    # From package DataFrames.
-using Distributions # From package Distributions.
+using CSV
+using DataFrames
+using Distributions
 
 export GameteCompetition
 """
@@ -24,7 +25,7 @@ This is the wrapper function for the Gamete Competition analysis option.
 """
 function GameteCompetition(control_file = ""; args...)
 
-  const GAMETE_COMPETITION_VERSION :: VersionNumber = v"0.1.0"
+  GAMETE_COMPETITION_VERSION :: VersionNumber = v"0.1.0"
   #
   # Print the logo. Store the initial directory.
   #
@@ -45,7 +46,8 @@ function GameteCompetition(control_file = ""; args...)
   # by setting their default values using the format:
   # keyword["some_keyword_name"] = default_value
   #
-  keyword["gamete_competition_table"] = "gamete competition Table Output.txt"
+  keyword["gamete_competition_output_table"] =
+    "gamete competition Output Table.txt"
   #
   # Process the run-time user-specified keywords that will control the analysis.
   # This will also initialize the random number generator.
@@ -142,16 +144,16 @@ function gamete_competition_option(pedigree::Pedigree, person::Person,
       continue
     end
     #
-    # Pass the variables to optimize for maximum likelihood estimation.
+    # Pass the variables to search for maximum likelihood estimation.
     #
     function fun(par)
-      copy!(parameter.par, par)
+      copyto!(parameter.par, par)
       f = elston_stewart_loglikelihood(penetrance_gamete_competition,
         prior_gamete_competition, transmission_gamete_competition,
         pedigree, person, locus, parameter, instruction, keyword)
       return (f, nothing, nothing)
     end # function fun
-    (best_par, best_value) = optimize(fun, parameter)
+    (best_par, best_value) = mendel_search(fun, parameter)
     (low_tau, low_allele) = findmin(best_par)
     (high_tau, high_allele) = findmax(best_par)
     #
@@ -164,7 +166,10 @@ function gamete_competition_option(pedigree::Pedigree, person::Person,
       locus.allele_name[loc][low_allele], low_tau,
       locus.allele_name[loc][high_allele], high_tau, pvalue])
   end
-  writetable(keyword["gamete_competition_table"], gamete_competition_frame)
+  gc_table_file = string(keyword["gamete_competition_output_table"])
+  CSV.write(gc_table_file, gamete_competition_frame;
+    writeheader = true, delim = keyword["output_field_separator"],
+    missingstring = keyword["output_missing_value"])
   show(gamete_competition_frame)
   close(io)
   return skipped_loci
@@ -268,6 +273,12 @@ function initialize_optimization_gamete_competition!(locus::Locus,
   parameter.constraint_level[1] = 1.0
   return parameter
 end # function initialize_optimization_gamete_competition!
+#
+# Method to obtain path to this package's data files
+# so they can be used in the documentation and testing routines.
+# For example, datadir("Control file.txt") will return
+# "/path/to/package/data/Control file.txt"
+#
+datadir(parts...) = joinpath(@__DIR__, "..", "data", parts...)
 
 end # module MendelGameteCompetition
-

@@ -4,6 +4,8 @@
 locus_file = gamete competition LocusFrame.txt
 pedigree_file = gamete competition PedigreeFrame.txt
 output_file = gamete competition Output.txt
+gamete_competition_output_table = gamete competition Output Table.txt
+
 #
 # Analysis parameters for Gamete Competition option.
 #
