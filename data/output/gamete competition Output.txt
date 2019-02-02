@@ -1,7 +1,7 @@
  
                 Search, Julia Version
 
-            (c) Copyright Kenneth Lange, 2016
+            (c) Copyright Kenneth Lange, 2019
 
 Title: Gamete competition analysis for SNP1
 Grid or search option: search
@@ -64,7 +64,7 @@ The asymptotic correlation matrix of the parameters:
  
                 Search, Julia Version
 
-            (c) Copyright Kenneth Lange, 2016
+            (c) Copyright Kenneth Lange, 2019
 
 Title: Gamete competition analysis for SNP2
 Grid or search option: search
@@ -129,7 +129,7 @@ The asymptotic correlation matrix of the parameters:
  
                 Search, Julia Version
 
-            (c) Copyright Kenneth Lange, 2016
+            (c) Copyright Kenneth Lange, 2019
 
 Title: Gamete competition analysis for SNP3
 Grid or search option: search
@@ -190,7 +190,7 @@ The asymptotic correlation matrix of the parameters:
  
                 Search, Julia Version
 
-            (c) Copyright Kenneth Lange, 2016
+            (c) Copyright Kenneth Lange, 2019
 
 Title: Gamete competition analysis for SNP4
 Grid or search option: search
@@ -257,7 +257,7 @@ The asymptotic correlation matrix of the parameters:
  
                 Search, Julia Version
 
-            (c) Copyright Kenneth Lange, 2016
+            (c) Copyright Kenneth Lange, 2019
 
 Title: Gamete competition analysis for SNP5
 Grid or search option: search
@@ -400,7 +400,7 @@ The asymptotic correlation matrix of the parameters:
  
                 Search, Julia Version
 
-            (c) Copyright Kenneth Lange, 2016
+            (c) Copyright Kenneth Lange, 2019
 
 Title: Gamete competition analysis for SNP6
 Grid or search option: search
@@ -451,7 +451,7 @@ The asymptotic correlation matrix of the parameters:
  
                 Search, Julia Version
 
-            (c) Copyright Kenneth Lange, 2016
+            (c) Copyright Kenneth Lange, 2019
 
 Title: Gamete competition analysis for SNP7
 Grid or search option: search
@@ -510,7 +510,7 @@ The asymptotic correlation matrix of the parameters:
  
                 Search, Julia Version
 
-            (c) Copyright Kenneth Lange, 2016
+            (c) Copyright Kenneth Lange, 2019
 
 Title: Gamete competition analysis for ID
 Grid or search option: search
@@ -569,7 +569,7 @@ The asymptotic correlation matrix of the parameters:
  
                 Search, Julia Version
 
-            (c) Copyright Kenneth Lange, 2016
+            (c) Copyright Kenneth Lange, 2019
 
 Title: Gamete competition analysis for SNP9
 Grid or search option: search
@@ -628,7 +628,7 @@ The asymptotic correlation matrix of the parameters:
  
                 Search, Julia Version
 
-            (c) Copyright Kenneth Lange, 2016
+            (c) Copyright Kenneth Lange, 2019
 
 Title: Gamete competition analysis for CT
 Grid or search option: search

@@ -11,13 +11,13 @@ using MendelBase
 # namely: DataStructures, ModelConstructions,
 # ElstonStewartPreparations, ElstonStewartEvaluations
 using MendelSearch
-using SearchSetup   # From package MendelSearch.
 #
 # Required external modules.
 #
 using CSV
 using DataFrames
 using Distributions
+using LinearAlgebra
 
 export GameteCompetition
 """
@@ -25,7 +25,7 @@ This is the wrapper function for the Gamete Competition analysis option.
 """
 function GameteCompetition(control_file = ""; args...)
 
-  GAMETE_COMPETITION_VERSION :: VersionNumber = v"0.1.0"
+  GAMETE_COMPETITION_VERSION :: VersionNumber = v"0.5.0"
   #
   # Print the logo. Store the initial directory.
   #
