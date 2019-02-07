@@ -40,7 +40,7 @@ Below is an example of a simple Control file to run Gamete Competition:
 	#
 	# Analysis parameters for Gamete Competition option.
 	#
-	disease_status = ACE
+	trait = ACE
 	affected_designator = 1
 	standard_errors = true
 
