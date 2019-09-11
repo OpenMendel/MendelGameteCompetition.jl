@@ -24,15 +24,12 @@ export GameteCompetition
 This is the wrapper function for the Gamete Competition analysis option.
 """
 function GameteCompetition(control_file = ""; args...)
-
-  GAMETE_COMPETITION_VERSION :: VersionNumber = v"0.5.0"
   #
   # Print the logo. Store the initial directory.
   #
   print(" \n \n")
   println("     Welcome to OpenMendel's")
   println(" Gamete Competition analysis option")
-  println("        version ", GAMETE_COMPETITION_VERSION)
   print(" \n \n")
   println("Reading the data.\n")
   initial_directory = pwd()
@@ -67,7 +64,7 @@ function GameteCompetition(control_file = ""; args...)
   # Read the genetic data from the external files named in the keywords.
   #
   (pedigree, person, nuclear_family, locus, snpdata,
-    locus_frame, phenotype_frame, pedigree_frame, snp_definition_frame) =
+    locus_frame, phenotype_frame, person_frame, snp_definition_frame) =
     read_external_data_files(keyword)
   #
   # Check if SNP data were read.
@@ -81,7 +78,7 @@ function GameteCompetition(control_file = ""; args...)
     println(" \nAnalyzing the data.\n")
     execution_error = false
     skipped_loci = gamete_competition_option(pedigree, person, nuclear_family,
-      locus, locus_frame, phenotype_frame, pedigree_frame, keyword)
+      locus, locus_frame, phenotype_frame, person_frame, keyword)
     if execution_error
       println(" \n \nERROR: Mendel terminated prematurely!\n")
     else
@@ -104,7 +101,7 @@ disease_status and affected_designator.
 """
 function gamete_competition_option(pedigree::Pedigree, person::Person,
   nuclear_family::NuclearFamily, locus::Locus, locus_frame::DataFrame,
-  phenotype_frame::DataFrame, pedigree_frame::DataFrame,
+  phenotype_frame::DataFrame, person_frame::DataFrame,
   keyword::Dict{AbstractString, Any})
 
   io = keyword["output_unit"]
@@ -157,7 +154,7 @@ function gamete_competition_option(pedigree::Pedigree, person::Person,
       copyto!(parameter.par, par)
       f = elston_stewart_loglikelihood(penetrance_gamete_competition,
         prior_gamete_competition, transmission_gamete_competition,
-        pedigree, person, locus, parameter, instruction, keyword)
+        pedigree, person, locus, parameter, instruction, person_frame, keyword)
       return (f, nothing, nothing)
     end # function fun
     (best_par, best_value) = mendel_search(fun, parameter)
@@ -186,8 +183,8 @@ end # function gamete_competition_option
 Supply a penetrance for individual i.
 """
 function penetrance_gamete_competition(person::Person, locus::Locus,
-  multi_genotype::Matrix{Int}, par::Vector{Float64},
-  keyword::Dict{AbstractString, Any}, start::Int, finish::Int, i::Int)
+  multi_genotype::Matrix{Int}, par::Vector{Float64}, person_frame::DataFrame,
+  keyword::Dict{AbstractString, Any}, startlocus::Int, endlocus::Int, i::Int)
 
   pen = 1.0
   return pen
@@ -197,20 +194,18 @@ end # function penetrance_gamete_competition
 Supply a prior probability for founder i.
 """
 function prior_gamete_competition(person::Person, locus::Locus,
-  multi_genotype::Matrix{Int}, par::Vector{Float64},
-  keyword::Dict{AbstractString, Any}, start::Int, finish::Int, i::Int)
+  multi_genotype::Matrix{Int}, par::Vector{Float64}, person_frame::DataFrame,
+  keyword::Dict{AbstractString, Any}, startlocus::Int, endlocus::Int, i::Int)
 
   prior_prob = 1.0
-  for l = start:finish
+  for l = startlocus:endlocus
     loc = locus.model_locus[l]
     allele = multi_genotype[1, l]
-    frequency = dot(vec(person.admixture[i, :]),
-                    vec(locus.frequency[loc][:, allele]))
+    frequency = dot(person.admixture[i, :], locus.frequency[loc][:, allele])
     prior_prob = prior_prob * frequency
     if !locus.xlinked[loc] || !person.male[i]
       allele = multi_genotype[2, l]
-      frequency = dot(vec(person.admixture[i, :]),
-                      vec(locus.frequency[loc][:, allele]))
+      frequency = dot(person.admixture[i, :], locus.frequency[loc][:, allele])
       prior_prob = prior_prob * frequency
     end
   end
@@ -223,12 +218,13 @@ genotype transmits a particular gamete to his or her child j.
 """
 function transmission_gamete_competition(person::Person, locus::Locus,
   gamete::Vector{Int}, multi_genotype::Matrix{Int}, par::Vector{Float64},
-  keyword::Dict{AbstractString, Any}, start::Int, finish::Int, i::Int, j::Int)
+  person_frame::DataFrame, keyword::Dict{AbstractString, Any},
+  startlocus::Int, endlocus::Int, i::Int, j::Int)
   #
   # For male to male inheritance at an x-linked locus,
   # set the transmission probability equal to 1.
   #
-  loc = locus.model_locus[start]
+  loc = locus.model_locus[startlocus]
   xlinked = locus.xlinked[loc]
   if xlinked && person.male[i] && person.male[j]
     return 1.0
@@ -236,9 +232,9 @@ function transmission_gamete_competition(person::Person, locus::Locus,
   #
   # Implement the gamete competition model.
   #
-  k = multi_genotype[1, start]
-  l = multi_genotype[2, start]
-  m = gamete[start]
+  k = multi_genotype[1, startlocus]
+  l = multi_genotype[2, startlocus]
+  m = gamete[startlocus]
   trans = 0.0
   if person.disease_status[j] == keyword["affected_designator"]
     if k == m; trans = trans + par[k] / (par[k] + par[l]); end
